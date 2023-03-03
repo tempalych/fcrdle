@@ -1,2 +1,4 @@
 # fcrdle
-Guess football club
+Guess football club by its stadium's capacity and location.
+
+
