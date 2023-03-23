@@ -1,0 +1,6 @@
+Tech issues:
+- Admin
+- Password hash
+
+Features:
+- Game stats
