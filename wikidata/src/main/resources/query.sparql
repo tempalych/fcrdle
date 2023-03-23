@@ -1,0 +1,33 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX hist: <http://wikiba.se/history/ontology#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+SELECT ?club ?leagueLabel ?clubLabel ?stadiumLabel ?coordinates ?capacity ?seasonLabel ?cityLabel
+WHERE {
+  ?club wdt:P31 wd:Q476028 .  # Instance of a football club
+  ?season wdt:P31 wd:Q27020041 ;  # Instance of a sports season
+          wdt:P3450 ?league .  # Season is part of league
+  ?club wdt:P118 ?league ; # Club is a participant in the league
+        wdt:P115 ?stadium ; # Club owns the stadium
+        wdt:P159 ?city.
+  ?stadium wdt:P625 ?coordinates ; # Stadium's coordinates
+           wdt:P1083 ?capacity . # Stadium's capacity
+
+  VALUES ?season {
+    wd:Q81085686 # 2022-23 Bundesliga
+    wd:Q111134726 # 2022-23 Premier-League
+    wd:Q111136037 # 2022-23 Serie A
+    wd:Q112132376 # 2022-23 Russian Premier-League
+    wd:Q111962552 # 2022-23 Primeira Liga
+    wd:Q111134893 # 2022-23 La Liga
+    wd:Q112744803 # 2022-23 Ligue 1
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
+ORDER BY ?leagueLabel ?clubLabel

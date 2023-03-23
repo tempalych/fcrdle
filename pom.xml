@@ -27,6 +27,7 @@
     <modules>
         <module>client</module>
         <module>server</module>
+        <module>wikidata</module>
     </modules>
 
     <build>
