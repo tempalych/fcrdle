@@ -16,6 +16,7 @@ store.commit('initialiseStore')
 
   <main>
     <GuessFC/>
+    <a target="_blank" href="https://icons8.com/icon/uZRLE51QnN2j/stadium">Stadium</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
   </main>
 </template>
 
