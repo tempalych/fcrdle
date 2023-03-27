@@ -7,7 +7,6 @@ import com.tempalych.fcrdle.server.dto.rs.DailyPuzzleResponse;
 import com.tempalych.fcrdle.server.dto.rs.GuessResponse;
 import com.tempalych.fcrdle.server.service.CsvService;
 import com.tempalych.fcrdle.server.service.GuessService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -68,8 +67,7 @@ public class GameController {
     }
 
     @PutMapping("/guess")
-    public ResponseEntity<GuessResponse> guess(@RequestBody @Valid GuessRequest request,
-                                               HttpServletRequest httpRequest) {
-        return ResponseEntity.ok(guessService.processGuess(request, httpRequest));
+    public ResponseEntity<GuessResponse> guess(@RequestBody @Valid GuessRequest request) {
+        return ResponseEntity.ok(guessService.processGuess(request));
     }
 }

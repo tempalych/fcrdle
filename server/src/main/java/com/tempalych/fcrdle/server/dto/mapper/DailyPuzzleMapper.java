@@ -5,9 +5,11 @@ import com.tempalych.fcrdle.server.model.DailyPuzzle;
 
 public class DailyPuzzleMapper {
     public static DailyPuzzleDto toDailyPuzzleDto(DailyPuzzle dailyPuzzle) {
-        return new DailyPuzzleDto()
-                .setDate(dailyPuzzle.getDate())
-                .setFootballClub(FootballClubMapper.toFootballClubDto(
-                        dailyPuzzle.getFootballClub()));
+        return DailyPuzzleDto.builder()
+                .date(dailyPuzzle.getDate())
+                .footballClub(
+                        FootballClubMapper.toFootballClubDto(
+                                dailyPuzzle.getFootballClub()))
+                .build();
     }
 }

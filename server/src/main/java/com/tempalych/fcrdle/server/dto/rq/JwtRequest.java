@@ -1,16 +1,13 @@
 package com.tempalych.fcrdle.server.dto.rq;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.ToString;
 
-@Setter
 @Getter
-@Accessors(chain = true)
-@NoArgsConstructor
-public class JwtRequest {
-
-    private String login;
-    private String password;
+@Builder
+@ToString
+public final class JwtRequest {
+    private final String login;
+    private final String password;
 }

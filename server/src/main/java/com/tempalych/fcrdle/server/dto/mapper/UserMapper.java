@@ -6,10 +6,11 @@ import com.tempalych.fcrdle.server.model.User;
 
 public class UserMapper {
     public static UserDto toUserDto(User user) {
-        return new UserDto()
-                .setLogin(user.getLogin())
-                .setPassword(user.getPassword())
-                .setRole(Role.valueOf(user.getRole()))
-                .setToken(user.getToken());
+        return UserDto.builder()
+                .login(user.getLogin())
+                .password(user.getPassword())
+                .role(Role.valueOf(user.getRole()))
+                .token(user.getToken())
+                .build();
     }
 }

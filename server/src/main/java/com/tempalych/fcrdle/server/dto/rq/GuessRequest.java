@@ -1,20 +1,16 @@
 package com.tempalych.fcrdle.server.dto.rq;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
 
 @Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
 @ToString
-public class GuessRequest {
-    private String footballClubId;
-    private LocalDate date;
-    private String userId;
+@Builder
+public final class GuessRequest {
+    private final String footballClubId;
+    private final LocalDate date;
+    private final String userId;
 }

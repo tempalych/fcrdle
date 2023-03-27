@@ -3,13 +3,11 @@ package com.tempalych.fcrdle.server.service;
 import com.tempalych.fcrdle.server.dto.DailyPuzzleDto;
 import com.tempalych.fcrdle.server.dto.FootballClubDto;
 import com.tempalych.fcrdle.server.dto.GuessInfoDto;
-import com.tempalych.fcrdle.server.dto.IpAddressDto;
 import com.tempalych.fcrdle.server.dto.mapper.DailyPuzzleMapper;
 import com.tempalych.fcrdle.server.dto.mapper.FootballClubMapper;
 import com.tempalych.fcrdle.server.dto.rq.DailyPuzzleRequest;
 import com.tempalych.fcrdle.server.dto.rq.GuessRequest;
 import com.tempalych.fcrdle.server.dto.rs.*;
-import com.tempalych.fcrdle.server.dto.rs.DailyPuzzleResponse;
 import com.tempalych.fcrdle.server.model.DailyPuzzle;
 import com.tempalych.fcrdle.server.model.FootballClub;
 import com.tempalych.fcrdle.server.model.GuessInfo;
@@ -19,7 +17,6 @@ import com.tempalych.fcrdle.server.repository.FootballClubRepository;
 import com.tempalych.fcrdle.server.repository.GuessInfoRepository;
 import com.tempalych.fcrdle.server.repository.IpAddressRepository;
 import com.tempalych.fcrdle.server.util.LocationUtils;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +24,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -71,7 +67,7 @@ public class GuessServiceImpl implements GuessService{
     }
 
     @Override
-    public GuessResponse processGuess(GuessRequest request, HttpServletRequest httpRequest) {
+    public GuessResponse processGuess(GuessRequest request) {
         logger.info("New guess: " + request);
         FootballClub puzzleFootballClub =
                 dailyPuzzleRepository.getByDate(request.getDate()).getFootballClub();
@@ -83,12 +79,13 @@ public class GuessServiceImpl implements GuessService{
 
         if (request.getFootballClubId().equals(puzzleFootballClubDto.getName())) {
             logger.info("Guess is correct");
-            guessResponse = new GuessCorrectResponse()
-                    .setCity(puzzleFootballClubDto.getCity())
-                    .setStadiumName(puzzleFootballClubDto.getStadiumName())
-                    .setLeague(puzzleFootballClubDto.getLeague())
-                    .setStadiumCapacity(puzzleFootballClubDto.getStadiumCapacity())
-                    .setCorrect(true);
+            guessResponse = GuessCorrectResponse.builder()
+                    .city(puzzleFootballClubDto.getCity())
+                    .stadiumName(puzzleFootballClubDto.getStadiumName())
+                    .league(puzzleFootballClubDto.getLeague())
+                    .stadiumCapacity(puzzleFootballClubDto.getStadiumCapacity())
+                    .isCorrect(true)
+                    .build();
         } else {
             FootballClub guessFootballClub =
                     footballClubRepository.findByName(request.getFootballClubId());
@@ -112,18 +109,19 @@ public class GuessServiceImpl implements GuessService{
 
             logger.info("Guess is incorrect: " + distance);
 
-            guessResponse = new GuessIncorrectResponse()
-                    .setDirection(direction)
-                    .setHowClose(distance.intValue())
-                    .setLeagueIsCorrect(leagueIsCorrect)
-                    .setGuessCapacityIsLess(guessCapacityIsLess)
-                    .setStadiumCapacity(guessFootballClubDto.getStadiumCapacity())
-                    .setStadiumName(guessFootballClubDto.getStadiumName())
-                    .setLeague(guessFootballClubDto.getLeague())
-                    .setCorrect(false);
+            guessResponse = GuessIncorrectResponse.builder()
+                    .direction(direction)
+                    .howClose(distance.intValue())
+                    .leagueIsCorrect(leagueIsCorrect)
+                    .guessCapacityIsLess(guessCapacityIsLess)
+                    .stadiumCapacity(guessFootballClubDto.getStadiumCapacity())
+                    .stadiumName(guessFootballClubDto.getStadiumName())
+                    .league(guessFootballClubDto.getLeague())
+                    .isCorrect(false)
+                    .build();
         }
 
-        try {
+        /*try {
             GuessInfoDto guessInfoDto = new GuessInfoDto()
                     .setPlatform(httpRequest.getHeader("sec-ch-ua-platform"))
                     .setMobile(httpRequest.getHeader("sec-ch-ua-mobile"))
@@ -138,7 +136,7 @@ public class GuessServiceImpl implements GuessService{
                     .subscribe(this::saveGuessInfo);
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
 
         return guessResponse;
     }

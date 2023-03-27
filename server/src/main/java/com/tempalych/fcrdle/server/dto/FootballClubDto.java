@@ -1,37 +1,33 @@
 package com.tempalych.fcrdle.server.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
+
+import java.util.Comparator;
 
 @Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
 @ToString
-public class FootballClubDto implements Comparable<FootballClubDto> {
-    private Long id;
-    private String name;
-    private String stadiumName;
-    private String league;
-    private LocationDto location;
-    private Integer stadiumCapacity;
-    private String city;
+@Builder
+public final class FootballClubDto implements Comparable<FootballClubDto> {
+    private final long id;
+    private final String name;
+    private final String stadiumName;
+    private final String league;
+    private final LocationDto location;
+    private final int stadiumCapacity;
+    private final String city;
+
+    private static final Comparator<FootballClubDto> COMPARATOR =
+            Comparator.comparing((FootballClubDto fc) -> fc.name)
+                    .thenComparing(fc -> fc.stadiumName)
+                    .thenComparing(fc -> fc.league)
+                    .thenComparing(fc -> fc.city)
+                    .thenComparing(fc -> fc.stadiumCapacity)
+                    .thenComparing(fc -> fc.location);
 
     @Override
     public int compareTo(FootballClubDto o) {
-        if (getName().equals(o.getName()) &&
-                getStadiumName().equals(o.getStadiumName()) &&
-                getLeague().equals(o.getLeague()) &&
-                getCity().equals(o.getCity()) &&
-                this.getStadiumCapacity().equals(o.getStadiumCapacity()) &&
-                getLocation().compareTo(o.getLocation()) == 0
-        ) {
-            return 0;
-        } else {
-            return -1;
-        }
+        return COMPARATOR.compare(this, o);
     }
 }

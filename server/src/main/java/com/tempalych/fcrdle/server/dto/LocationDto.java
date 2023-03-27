@@ -1,27 +1,26 @@
 package com.tempalych.fcrdle.server.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
+
+import java.util.Comparator;
 
 @Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
 @ToString
-public class LocationDto implements Comparable<LocationDto> {
-    Double latitude;
-    Double longitude;
+@Builder
+public final class LocationDto implements Comparable<LocationDto> {
+    private final Double latitude;
+    private final Double longitude;
+
+
+
+    private static final Comparator<LocationDto> COMPARATOR =
+            Comparator.comparingDouble((LocationDto l) -> l.latitude)
+                    .thenComparingDouble(l -> l.longitude);
 
     @Override
     public int compareTo(LocationDto o) {
-        if (getLatitude().equals(o.getLatitude()) &&
-                getLongitude().equals(o.getLongitude())) {
-            return 0;
-        } else {
-            return -1;
-        }
+        return COMPARATOR.compare(this, o);
     }
 }

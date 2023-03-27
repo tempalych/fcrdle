@@ -1,17 +1,15 @@
 package com.tempalych.fcrdle.server.dto;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.ToString;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@Accessors(chain = true)
-public class UserDto {
-    private String login;
-    private String password;
-    private Role role;
-    private String token;
+@Builder
+@ToString
+public final class UserDto {
+    private final String login;
+    private final String password;
+    private final Role role;
+    private final String token;
 }

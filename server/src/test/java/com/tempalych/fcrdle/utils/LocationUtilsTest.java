@@ -16,11 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LocationUtilsTest {
     @Test
     void getDirection() {
-        LocationDto locationFrom = new LocationDto()
-                .setLatitude(43.2408D).setLongitude(39.5722D); // Sochi
+        LocationDto locationFrom = LocationDto
+                .builder()
+                .latitude(43.2408D)
+                .longitude(39.5722D)
+                .build(); // Sochi
 
-        LocationDto locationTo = new LocationDto()
-                .setLatitude(55.4729D).setLongitude(37.3335D); // Moscow
+        LocationDto locationTo = LocationDto.builder()
+                .latitude(55.4729D)
+                .longitude(37.3335D)
+                .build(); // Moscow
 
         assertEquals("⬆️",
                 LocationUtils.getDirection(locationFrom, locationTo));

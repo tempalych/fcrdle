@@ -1,19 +1,15 @@
 package com.tempalych.fcrdle.server.dto.rs;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 @Getter
-@Setter
-@Accessors(chain = true)
-@NoArgsConstructor
 @ToString
+@AllArgsConstructor
 public class GuessResponse {
-    private boolean isCorrect;
-    private String league;
-    private Integer stadiumCapacity;
-    private String stadiumName;
+    private final boolean isCorrect;
+    private final String league;
+    private final Integer stadiumCapacity;
+    private final String stadiumName;
 }

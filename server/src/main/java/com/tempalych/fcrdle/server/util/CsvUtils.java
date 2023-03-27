@@ -41,22 +41,24 @@ public class CsvUtils {
         Integer fcCapacity = Integer.parseInt(values.get(4).replace(",", ""));
         LocationDto fcLocation = parseLocation(values.get(5));
 
-        return new FootballClubDto()
-                .setName(fcName)
-                .setStadiumName(fcStadiumName)
-                .setStadiumCapacity(fcCapacity)
-                .setLeague(fcLeague)
-                .setLocation(fcLocation)
-                .setCity(fcCity);
+        return FootballClubDto.builder()
+                .name(fcName)
+                .stadiumName(fcStadiumName)
+                .stadiumCapacity(fcCapacity)
+                .league(fcLeague)
+                .location(fcLocation)
+                .city(fcCity)
+                .build();
     }
 
     public static LocationDto parseLocation(String locationStr) {
         String[] coordinatesStr = locationStr.split(" ");
         double latitude = parseCoordinate(coordinatesStr[0]);
         double longitude = parseCoordinate(coordinatesStr[1]);
-        return new LocationDto()
-                .setLatitude(latitude)
-                .setLongitude(longitude);
+        return LocationDto.builder()
+                .latitude(latitude)
+                .longitude(longitude)
+                .build();
     }
 
     public static Double parseCoordinate(String coordinate) {

@@ -30,8 +30,10 @@ public class CsvUtilsTest {
 
     @Test
     void parseLocation() {
-        LocationDto testLocation = new LocationDto()
-                .setLatitude(50.514256D).setLongitude(12.3419D);
+        LocationDto testLocation = LocationDto.builder()
+                .latitude(50.514256D)
+                .longitude(12.3419D)
+                .build();
         LocationDto parsedLocation = CsvUtils
                 .parseLocation("50°51′42.56″N 12°34′19.00″E");
         assertEquals(0, testLocation.compareTo(parsedLocation));
@@ -39,15 +41,17 @@ public class CsvUtilsTest {
 
     @Test
     void parseStr() {
-        FootballClubDto testFootballClub = new FootballClubDto()
-                .setName("Club Name")
-                .setStadiumName("Stadium Name")
-                .setLeague("League Name")
-                .setLocation(new LocationDto()
-                        .setLatitude(53.2747D)
-                        .setLongitude(-2.1729D))
-                .setStadiumCapacity(74310)
-                .setCity("City");
+        FootballClubDto testFootballClub = FootballClubDto.builder()
+                .name("Club Name")
+                .stadiumName("Stadium Name")
+                .league("League Name")
+                .location(LocationDto.builder()
+                        .latitude(53.2747D)
+                        .longitude(-2.1729D)
+                        .build())
+                .stadiumCapacity(74310)
+                .city("City")
+                .build();
         FootballClubDto parsedFootballClub = CsvUtils
                 .getRecordFromLine("League Name;Stadium Name;Club Name;City;74,310;53°27′47″N 002°17′29″W");
 
