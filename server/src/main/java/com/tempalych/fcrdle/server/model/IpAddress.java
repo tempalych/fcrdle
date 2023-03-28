@@ -17,7 +17,7 @@ public class IpAddress {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name="ip")
     private String ip;
@@ -32,10 +32,10 @@ public class IpAddress {
     private String city;
 
     @Column(name = "loc_latitude")
-    private Double locationLatitude;
+    private double locationLatitude;
 
     @Column(name = "loc_longitude")
-    private Double locationLongitude;
+    private double locationLongitude;
 
     @Column(name = "timezone")
     private String timezone;

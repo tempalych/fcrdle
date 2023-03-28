@@ -19,7 +19,7 @@ public class FootballClub {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "club_name")
     private String name;
@@ -31,13 +31,13 @@ public class FootballClub {
     private String league;
 
     @Column(name = "loc_latitude")
-    private Double locationLatitude;
+    private double locationLatitude;
 
     @Column(name = "loc_longitude")
-    private Double locationLongitude;
+    private double locationLongitude;
 
     @Column(name = "stadium_capacity")
-    private Integer stadiumCapacity;
+    private int stadiumCapacity;
 
     @Column(name = "city")
     private String city;

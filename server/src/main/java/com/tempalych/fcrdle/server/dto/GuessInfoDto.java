@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public final class GuessInfoDto {
-    private final Long id;
+    private final long id;
     private final LocalDateTime requestTime;
     private final String guessClub;
     private final IpAddressDto ipAddress;
     private final String platform;
     private final String mobile;
     private final String language;
-    private final Boolean correct;
+    private final boolean correct;
     private final String userId;
 }

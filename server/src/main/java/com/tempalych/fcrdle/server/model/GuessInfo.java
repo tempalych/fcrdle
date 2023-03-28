@@ -18,7 +18,7 @@ public class GuessInfo {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name="request_time")
     private LocalDateTime requestTime;
@@ -40,7 +40,7 @@ public class GuessInfo {
     private String language;
 
     @Column(name="correct")
-    private Boolean correct;
+    private boolean correct;
 
     @Column(name="userId")
     private String userId;

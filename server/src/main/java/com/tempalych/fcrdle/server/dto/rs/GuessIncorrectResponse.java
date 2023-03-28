@@ -8,9 +8,9 @@ import lombok.ToString;
 @ToString
 public class GuessIncorrectResponse extends GuessResponse {
     private final String direction;
-    private final Integer howClose;
-    private final Boolean guessCapacityIsLess;
-    private final Boolean leagueIsCorrect;
+    private final int howClose;
+    private final boolean guessCapacityIsLess;
+    private final boolean leagueIsCorrect;
 
     @Builder
     public GuessIncorrectResponse(boolean isCorrect, String league,

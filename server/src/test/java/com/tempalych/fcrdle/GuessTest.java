@@ -136,8 +136,8 @@ public class GuessTest {
         assertFalse(response.isCorrect());
         GuessIncorrectResponse incorrectResponse = (GuessIncorrectResponse) response;
         assertEquals(249, incorrectResponse.getHowClose());
-        assertFalse(incorrectResponse.getGuessCapacityIsLess());
-        assertFalse(incorrectResponse.getLeagueIsCorrect());
+        assertFalse(incorrectResponse.isGuessCapacityIsLess());
+        assertFalse(incorrectResponse.isLeagueIsCorrect());
         assertEquals("↘️️", incorrectResponse.getDirection());
     }
 }

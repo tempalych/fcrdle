@@ -201,7 +201,7 @@ public class GuessServiceImpl implements GuessService{
                 .setLanguage(guess.getLanguage())
                 .setMobile(guess.getMobile())
                 .setPlatform(guess.getPlatform())
-                .setCorrect(guess.getCorrect())
+                .setCorrect(guess.isCorrect())
                 .setUserId(guess.getUserId())
                 .setRequestTime(LocalDateTime.now());
         guessInfoRepository.save(guessInfo);

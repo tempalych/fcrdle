@@ -10,6 +10,6 @@ import lombok.ToString;
 public class GuessResponse {
     private final boolean isCorrect;
     private final String league;
-    private final Integer stadiumCapacity;
+    private final int stadiumCapacity;
     private final String stadiumName;
 }

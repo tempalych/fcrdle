@@ -19,8 +19,8 @@ public class IpApiResponse {
     private String regionName; // "Podgorica"
     private String city; // "Podgorica"
     private String zip; // ""
-    private Double lat; // 42.4411
-    private Double lon; // 19.2632
+    private double lat; // 42.4411
+    private double lon; // 19.2632
     private String timezone; // "Europe/Podgorica"
     private String isp; // "Internet Crna Gora"
     private String org; // ""

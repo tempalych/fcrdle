@@ -10,10 +10,8 @@ import java.util.Comparator;
 @ToString
 @Builder
 public final class LocationDto implements Comparable<LocationDto> {
-    private final Double latitude;
-    private final Double longitude;
-
-
+    private final double latitude;
+    private final double longitude;
 
     private static final Comparator<LocationDto> COMPARATOR =
             Comparator.comparingDouble((LocationDto l) -> l.latitude)
